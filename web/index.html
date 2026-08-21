@@ -6,13 +6,41 @@
     <title>QAWolf Demo</title>
 
     <script>
-    (function(apiKey){
-        (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
-        v=['initialize','identify','updateOptions','pageLoad','track', 'trackAgent'];for(w=0,x=v.length;w<x;++w)(function(m){
-        o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
-        y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo-dev.pendo-dev.com/agent/static/'+apiKey+'/pendo.js';
-        z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
-    })('35fbb3fd-e179-45da-80cc-7f2c196ca469');
+      (function (apiKey) {
+        (function (p, e, n, d, o) {
+          var v, w, x, y, z;
+          o = p[d] = p[d] || {};
+          o._q = o._q || [];
+          v = [
+            "initialize",
+            "identify",
+            "updateOptions",
+            "pageLoad",
+            "track",
+            "trackAgent",
+          ];
+          for (w = 0, x = v.length; w < x; ++w)
+            (function (m) {
+              o[m] =
+                o[m] ||
+                function () {
+                  o._q[m === v[0] ? "unshift" : "push"](
+                    [m].concat([].slice.call(arguments, 0)),
+                  );
+                };
+            })(v[w]);
+          y = e.createElement(n);
+          y.async = !0;
+          y.src =
+            "https://cdn.pendo-dev.pendo-dev.com/agent/static/" +
+            apiKey +
+            "/pendo.js";
+          z = e.getElementsByTagName(n)[0];
+          z.parentNode.insertBefore(y, z);
+        })(window, document, "script", "pendo");
+      })(
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhY2VudGVyIjoidXMiLCJrZXkiOiI2ZDM2OGNiOWY3NGJkZWRkMmE5ZTZkZTBiNzg2NWQ5M2UwZWJjMGEyMWIxNTQwYWI3NWVkNjJhY2I2NTZmZmQ3NzJjMTVjOTNkOGRkNGM5YTJhNWJiNmZiMmRhZDljNDBlOWJkNDc2N2Y1M2E0OTVkZmZhNGJmMGU2MjgzYjZhNjgyM2Q0M2NjMmIwMmQwZGNlY2E2MjY5NjgxYmY0MjJjMDJmYmEzZDQyOGQ1OWYyMGUxZDA5MDc0ZjQ1OThiMjguNWMwMjBmNGNmNjQ4NjA1YThiN2Y2MzJjMWI2OWUwMjAuNzY4OWYxNDQzODJmMWNlYTE1ZGE3OGE2M2ZiYmVkOGFiMTY2MTBkNTIyNDBmNTg4ZmE3Mzk4MDI3NzZlZTM5YiJ9.d9EwpbilZwhSsFM8-Ep-qO8wTFcZf9pyGdIYwGIHIT1kPWDTnzkGViWM46_UcU5Lu3bYdHomLrQnS9pGVklgeTwH7fh_HEsMcVo2RN8hWyd9SJXX5bhB6r9z2agFKcz-nxvR8XCCB4gdDaX_W3AL--dAx3FDH3JJ1_8oOPeAbbU",
+      );
     </script>
   </head>
   <body>
