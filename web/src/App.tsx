@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api, type AppState } from "./api";
+import { api, ApiError, type AppState } from "./api";
 
 // Seam for Pendo. Novus installs the Pendo agent, which provides window.pendo
 // at runtime; this fires a Track Event for each action. No-op when the agent
@@ -20,7 +20,18 @@ export default function App() {
       setState(await fn());
       trackEvent(name);
     } catch (e) {
-      setError((e as Error).message);
+      const message = (e as Error).message;
+      setError(message);
+      // Track Event: a counter API call (load/increment/decrement/reset/refresh)
+      // failed — non-OK HTTP status or network error. Lets Pendo report a
+      // failure rate per action, which Feature clicks alone cannot express.
+      window.pendo?.track?.("counter_action_failed", {
+        action: name,
+        errorMessage: message.substring(0, 200),
+        // null means no HTTP response (e.g. network error / CORS failure).
+        httpStatus: e instanceof ApiError ? e.status : null,
+        counter: state.counter,
+      });
     }
   };
 
