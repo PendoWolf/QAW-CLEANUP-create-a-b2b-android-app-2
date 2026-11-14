@@ -20,7 +20,18 @@ export default function App() {
       setState(await fn());
       trackEvent(name);
     } catch (e) {
-      setError((e as Error).message);
+      const err = e as Error;
+      setError(err.message);
+      // Track Event: an API call failed and the error message is shown.
+      // Fires once per failed call. Not routed through trackEvent() because
+      // that helper adds the "demo-" prefix and this name must stay verbatim.
+      const status = /failed: (\d+)$/.exec(err.message)?.[1];
+      window.pendo?.track?.("Action failed", {
+        action: name,
+        error_type: err.name || "Error",
+        http_status: status ? Number(status) : null,
+        error_message: err.message.slice(0, 100),
+      });
     }
   };
 
